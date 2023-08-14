@@ -1,4 +1,4 @@
-const { createTaskSchema } = require("../schemas/task.schema");
+const { createTaskSchema,updateTaskSchema } = require("../schemas/task.schema");
 const TaskService = require("../services/tasks.services");
 const moment = require("moment");
 
@@ -70,7 +70,7 @@ exports.updateTask = async (req, res) => {
 
     if (!taskId) return res.status(404).json({ error: "TaskId is required" });
 
-    const { success,data } = updateTaskSchema.safeParse(payload);
+    const { success,data } = updateTaskSchema.safeParse(req.body);
 
     if(!success){
       return res.status(400).json({ error: "Invalid Payload" });
